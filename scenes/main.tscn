@@ -1,0 +1,81 @@
+[gd_scene load_steps=7 format=4 uid="uid://c76vqfj1mn0sk"]
+
+[ext_resource type="Texture2D" uid="uid://bokx78puvx6ko" path="res://assets/TX Tileset Grass.png" id="1_o0gfs"]
+[ext_resource type="PackedScene" uid="uid://ceecc6ntnche" path="res://scenes/tree.tscn" id="2_bs8bb"]
+[ext_resource type="PackedScene" uid="uid://dc5acx317woxt" path="res://scenes/player.tscn" id="3_w22km"]
+[ext_resource type="PackedScene" uid="uid://cfmkn4m66owdp" path="res://scenes/boundary.tscn" id="4_nv4ea"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tquko"]
+texture = ExtResource("1_o0gfs")
+texture_region_size = Vector2i(64, 64)
+1:0/0 = 0
+1:0/0/y_sort_origin = -1000
+0:0/0 = 0
+0:0/0/y_sort_origin = -1000
+2:0/0 = 0
+2:0/0/y_sort_origin = -1000
+2:1/0 = 0
+2:1/0/y_sort_origin = -1000
+3:1/0 = 0
+3:1/0/y_sort_origin = -1000
+3:0/0 = 0
+3:0/0/y_sort_origin = -1000
+0:1/0 = 0
+0:1/0/y_sort_origin = -1000
+1:1/0 = 0
+1:1/0/y_sort_origin = -1000
+2:2/0 = 0
+2:2/0/y_sort_origin = -1000
+3:2/0 = 0
+3:2/0/y_sort_origin = -1000
+0:2/0 = 0
+0:2/0/y_sort_origin = -1000
+1:2/0 = 0
+1:2/0/y_sort_origin = -1000
+0:3/0 = 0
+0:3/0/y_sort_origin = -1000
+1:3/0 = 0
+1:3/0/y_sort_origin = -1000
+2:3/0 = 0
+2:3/0/y_sort_origin = -1000
+3:3/0 = 0
+3:3/0/y_sort_origin = -1000
+
+[sub_resource type="TileSet" id="TileSet_xj6ya"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_tquko")
+
+[node name="Main" type="Node2D"]
+y_sort_enabled = true
+position = Vector2(454, 223)
+
+[node name="Grass" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+position = Vector2(-6, -3)
+rotation = 0.469494
+skew = 0.596903
+tile_map_data = PackedByteArray("AAABAP//AAAAAAIAAAAAAP//AAAAAAMAAAD/////AAACAAMAAAD+////AAACAAEAAAD+/wAAAAADAAMAAAD+/wEAAAADAAEAAAD//wEAAAACAAMAAAD//wIAAAABAAEAAAABAAIAAAADAAEAAAABAAEAAAACAAMAAAABAAAAAAAAAAMAAAAAAAAAAAAAAAIAAAD//wAAAAAAAAMAAAAAAAEAAAAAAAIAAAD+//7/AAACAAEAAAAAAP7/AAABAAIAAAABAP7/AAABAAEAAAACAP7/AAACAAEAAAACAP//AAADAAEAAAACAAAAAAADAAMAAAACAAEAAAACAAAAAAD9//7/AAABAAEAAAD9////AAABAAAAAAD9/wAAAAADAAIAAAD9/wEAAAACAAEAAAD9/wIAAAABAAEAAAD+/wIAAAAAAAAAAAACAAIAAAABAAAAAAD9//3/AAAAAAEAAAD+//3/AAACAAAAAAD///3/AAADAAAAAAAAAP3/AAABAAIAAAABAP3/AAACAAEAAAACAP3/AAACAAAAAAADAP3/AAABAAAAAAADAP7/AAADAAEAAAADAP//AAAAAAEAAAADAAAAAAADAAMAAAADAAEAAAABAAEAAAD9//z/AAADAAEAAAD+//z/AAACAAAAAAD///z/AAADAAAAAAAAAPz/AAABAAMAAAABAPz/AAADAAAAAAACAPz/AAACAAAAAAADAPz/AAAAAAEAAAAEAPz/AAABAAAAAAAEAP3/AAADAAAAAAAEAP7/AAABAAAAAAAEAP//AAABAAEAAAAEAAAAAAADAAIAAAAEAAEAAAAAAAEAAAAEAAIAAAADAAAAAAADAAIAAAAAAAAAAAD8//v/AAABAAAAAAD8//z/AAADAAAAAAD8//3/AAAAAAAAAAD8//7/AAAAAAAAAAD8////AAAAAAEAAAD8/wAAAAADAAIAAAD8/wEAAAAAAAAAAAD8/wIAAAADAAEAAAD8/wMAAAAAAAEAAAD9/wMAAAADAAEAAAD+/wMAAAADAAAAAAD//wMAAAADAAEAAAAAAAMAAAABAAIAAAABAAMAAAAAAAEAAAACAAMAAAAAAAEAAAADAAMAAAAAAAEAAAAEAAMAAAADAAEAAAAEAPv/AAABAAEAAAADAPv/AAABAAEAAAACAPv/AAABAAAAAAABAPv/AAACAAEAAAAAAPv/AAABAAMAAAD///v/AAACAAAAAAD+//v/AAABAAEAAAD9//v/AAACAAEAAAD7//v/AAADAAEAAAD7//z/AAADAAAAAAD7//3/AAABAAAAAAD7//7/AAACAAEAAAD7////AAABAAEAAAD7/wAAAAADAAMAAAD7/wEAAAACAAEAAAD7/wIAAAABAAEAAAD7/wMAAAADAAAAAAD7/wQAAAAAAAEAAAD8/wQAAAACAAAAAAD9/wQAAAABAAEAAAD+/wQAAAAAAAEAAAD//wQAAAACAAAAAAAAAAQAAAABAAIAAAABAAQAAAADAAAAAAACAAQAAAADAAEAAAADAAQAAAACAAEAAAAEAAQAAAAAAAEAAAD///7/AAADAAEAAAAAAAIAAAABAAMAAAA=")
+tile_set = SubResource("TileSet_xj6ya")
+
+[node name="Tree" parent="." instance=ExtResource("2_bs8bb")]
+y_sort_enabled = true
+position = Vector2(76, -86)
+
+[node name="Tree2" parent="." instance=ExtResource("2_bs8bb")]
+y_sort_enabled = true
+position = Vector2(161, 97)
+
+[node name="Tree3" parent="." instance=ExtResource("2_bs8bb")]
+y_sort_enabled = true
+position = Vector2(-88, -8)
+
+[node name="Player" parent="." instance=ExtResource("3_w22km")]
+position = Vector2(-12, 22)
+
+[node name="Boundary Left" parent="." instance=ExtResource("4_nv4ea")]
+position = Vector2(-91, 252)
+rotation = 0.469494
+
+[node name="Boundary Right" parent="." instance=ExtResource("4_nv4ea")]
+position = Vector2(39, 276)
+rotation = -0.5044
