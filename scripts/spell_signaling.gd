@@ -22,15 +22,19 @@ func reset_highlights():
 # Modified functions to collect components and call highlight_all_components
 func _on_prefix_detected(prefix):
 	print("Received prefix_detected signal for:", prefix)
-	highlight_all_components([prefix])
 
 func _on_root_detected(root):
 	print("Received root_detected signal for:", root)
-	highlight_all_components([root])
 
 func _on_suffix_detected(suffix):
 	print("Received suffix_detected signal for:", suffix)
-	highlight_all_components([suffix])
+
+func _on_invalid_spellword() -> void:
+	print('invalid!!')
+	reset_highlights()
+
+func _on_valid_spellword() -> void:
+	pass
 
 # Collects and highlights all components together for a single valid spellword
 func highlight_valid_spell_components(prefixes: Array, root: String, suffixes: Array):

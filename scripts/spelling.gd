@@ -6,6 +6,8 @@ var allowed_characters = "[A-Za-z]"
 @export var spellword = ''
 @onready var rich_text_label: RichTextLabel = $"../RichTextLabel"
 
+signal invalid_spellword
+signal valid_spellword
 signal prefix_detected(prefix)
 signal root_detected(root)
 signal suffix_detected(suffix)
@@ -46,6 +48,12 @@ func flatten_array(nested_array: Array) -> Array:
 			flat_array.append(element)
 	return flat_array
 
+# Custom function to check if a string begins with a substring at a specific index
+func begins_with_at_index(str: String, substring: String, index: int) -> bool:
+	if index < 0 or index >= str.length():
+		return false  # Index out of bounds
+	return str.substr(index, substring.length()) == substring
+
 func is_valid_spell(spellword: String) -> bool:
 	var components = []
 	var all_prefixes = flatten_array(prefixes.values())
@@ -78,33 +86,51 @@ func is_valid_spell(spellword: String) -> bool:
 	if root_found == "":
 		return false  # No valid root found
 
-	# Collect all valid suffixes (one per category)
+	# Collect all valid suffixes (one per category) in the correct order
 	var detected_suffixes = []
-	for category in suffixes:
-		for suffix in suffixes[category]:
-			if spellword.ends_with(suffix) and category not in used_suffix_categories:
-				components.append(suffix)
-				detected_suffixes.append(suffix)
-				emit_signal("suffix_detected", suffix)
-				spellword = spellword.substr(0, spellword.length() - suffix.length())
-				used_suffix_categories[category] = true
-				break  # Move to the next category
+	var remaining_spellword = spellword  # Keep track of the remaining spellword for suffix parsing
 
-	# If there's any leftover text, it's not a valid spell
+	# Iterate from left to right to detect suffixes
+	var i = 0
+	while i < remaining_spellword.length():
+		var matched_suffix = false  # Flag to indicate if a suffix was matched
+		for category in suffixes:
+			for suffix in suffixes[category]:
+				# Use the custom function to check if the substring starts at index `i`
+				if begins_with_at_index(remaining_spellword, suffix, i) and category not in used_suffix_categories:
+					components.append(suffix)
+					detected_suffixes.append(suffix)
+					emit_signal("suffix_detected", suffix)
+					used_suffix_categories[category] = true
+					i += suffix.length()  # Move index forward by the length of the matched suffix
+					matched_suffix = true  # Set the flag to true
+					break  # Break out of the inner loop once a match is found
+			if matched_suffix:
+				break  # Break out of the category loop if a match is found
+		if not matched_suffix:
+			i += 1  # Move to the next character if no suffix is matched
+
+	# Ensure the `spellword` is emptied properly after suffix parsing
+	if i == remaining_spellword.length():
+		spellword = ""  # Mark spellword as fully parsed
+
+	# Ensure the spellword is fully parsed with no leftover text
 	if spellword != "":
 		return false
-		
+
 	# Emit a signal to highlight all components at once
 	var spell_container: FlowContainer = $"../SpellContainer"
+	
 	spell_container.highlight_valid_spell_components(detected_prefixes, root_found, detected_suffixes)
 
 	return true
-	
+
 func _on_text_changed(new_text: String) -> void:
 	spellword = new_text.strip_edges()
 	if is_valid_spell(spellword):
 		rich_text_label.text = "Valid Spell: " + spellword
 	else:
+		invalid_spellword.emit()
 		rich_text_label.text = "Invalid Spell"
 
 func _ready():
