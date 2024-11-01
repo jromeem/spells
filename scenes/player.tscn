@@ -1,8 +1,9 @@
-[gd_scene load_steps=30 format=3 uid="uid://dc5acx317woxt"]
+[gd_scene load_steps=34 format=3 uid="uid://dc5acx317woxt"]
 
 [ext_resource type="Script" path="res://scripts/player_movement.gd" id="1_ky4bs"]
 [ext_resource type="Texture2D" uid="uid://dksudyio5mr5x" path="res://assets/DinoSprites - tard.png" id="2_7xn2b"]
 [ext_resource type="PackedScene" uid="uid://67av1dmrvnw7" path="res://scenes/conjuring_fx.tscn" id="3_foe4g"]
+[ext_resource type="Script" path="res://scenes/spelling.gd" id="4_prnyb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s380s"]
 radius = 3.0
@@ -204,6 +205,30 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="SystemFont" id="SystemFont_ufxk6"]
+font_names = PackedStringArray("Andale Mono")
+font_weight = 999
+oversampling = 10.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8776n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lb3q5"]
+content_margin_left = 6.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.204459, 0.195015, 0.180139, 0.741176)
+border_color = Color(0, 0, 0, 0)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0.0862745, 0.0862745, 0.0862745, 0)
+shadow_size = 1
+shadow_offset = Vector2(1, 2)
+anti_aliasing_size = 0.01
+
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_ky4bs")
@@ -228,3 +253,38 @@ frame_progress = 0.00362824
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(8, -6)
 zoom = Vector2(6, 6)
+
+[node name="Container" type="Control" parent="."]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LineEdit" type="LineEdit" parent="Container"]
+layout_mode = 2
+anchor_left = 0.474
+anchor_top = 0.522
+anchor_right = 0.474
+anchor_bottom = 0.522
+offset_left = -154.316
+offset_top = 90.626
+offset_right = 169.684
+offset_bottom = 121.626
+theme_override_colors/font_color = Color(1, 0.752941, 0.403922, 0.627451)
+theme_override_fonts/font = SubResource("SystemFont_ufxk6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8776n")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lb3q5")
+max_length = 25
+expand_to_text_length = true
+caret_blink = true
+caret_blink_interval = 0.25
+caret_force_displayed = true
+caret_mid_grapheme = true
+script = ExtResource("4_prnyb")
+
+[connection signal="text_changed" from="Container/LineEdit" to="Container/LineEdit" method="_on_text_changed"]

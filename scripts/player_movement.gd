@@ -13,7 +13,7 @@ func _on_conjure_end():
 	speed = 80
 
 func _ready():
-	var conjuring = get_node("Conjuring/ConjuringFX")
+	var conjuring = get_node("Conjuring/AnimatedSprite2D")
 	conjuring.connect("conjuring_started", _on_conjure_start)
 	conjuring.connect("conjuring_ended", _on_conjure_end)
 

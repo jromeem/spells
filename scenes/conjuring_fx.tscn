@@ -55,11 +55,11 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Node2D" type="Node2D"]
+[node name="ConjuringFX" type="Node2D"]
 
-[node name="ConjuringFX" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fueoy")
 animation = &"air"
-frame_progress = 0.913563
+frame_progress = 0.334552
 offset = Vector2(0, 15)
 script = ExtResource("2_fxirh")

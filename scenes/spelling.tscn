@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bguam8er1y2p3"]
+
+[sub_resource type="SystemFont" id="SystemFont_glsu3"]
+font_names = PackedStringArray("Courier New")
+font_weight = 999
+oversampling = 10.0
+
+[node name="Spelling" type="Node2D"]
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_right = 126.063
+offset_bottom = 31.0
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="CenterContainer"]
+custom_minimum_size = Vector2(282, 32)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_glsu3")
