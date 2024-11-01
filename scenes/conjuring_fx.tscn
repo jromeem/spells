@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://67av1dmrvnw7"]
 
 [ext_resource type="Texture2D" uid="uid://c7e5s2kft5jdb" path="res://assets/Free Smoke Fx  Pixel 05.png" id="1_6ered"]
-[ext_resource type="Script" path="res://scenes/conjuring_fx.gd" id="2_fxirh"]
+[ext_resource type="Script" path="res://scripts/conjuring_fx.gd" id="2_fxirh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rmdc2"]
 atlas = ExtResource("1_6ered")

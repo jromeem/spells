@@ -10,14 +10,11 @@ func _ready() -> void:
 	
 func toggle_conjuring():
 	isConjuring = !isConjuring
-	print('toggle', isConjuring)
 	conjuring_fx.visible = isConjuring
 	if (isConjuring):
-		print('play?')
 		conjuring_fx.play("air")
 		conjuring_started.emit()
 	else:
-		print('stop?')
 		conjuring_fx.stop()
 		conjuring_ended.emit()
 
