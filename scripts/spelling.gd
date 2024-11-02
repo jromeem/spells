@@ -54,84 +54,117 @@ func begins_with_at_index(str: String, substring: String, index: int) -> bool:
 		return false  # Index out of bounds
 	return str.substr(index, substring.length()) == substring
 
-func is_valid_spell(spellword: String) -> bool:
-	var components = []
-	var all_prefixes = flatten_array(prefixes.values())
-	var all_suffixes = flatten_array(suffixes.values())
+func is_valid_spell(spell_input: String) -> bool:
+	# Make a copy of the input to work with
+	var remaining_text = spell_input
+	
+	# Track detected components for highlighting
+	var detected_prefixes = []
+	var detected_root = ""
+	var detected_suffixes = []
+	
+	# Track used categories to ensure one prefix/suffix per category
 	var used_prefix_categories = {}
 	var used_suffix_categories = {}
-
-	# Collect all valid prefixes (one per category)
-	var detected_prefixes = []
-	for category in prefixes:
-		for prefix in prefixes[category]:
-			if spellword.begins_with(prefix) and category not in used_prefix_categories:
-				components.append(prefix)
-				detected_prefixes.append(prefix)
-				emit_signal("prefix_detected", prefix)
-				spellword = spellword.substr(prefix.length(), spellword.length() - prefix.length())
-				used_prefix_categories[category] = true
-				break  # Move to the next category
-
-	# Find and extract the root in the remaining string
-	var root_found = ""
+	
+	# Step 1: Detect prefixes
+	var prefix_found = true
+	while prefix_found and remaining_text.length() > 0:
+		prefix_found = false
+		for category in prefixes:
+			if category in used_prefix_categories:
+				continue  # Skip if category already used
+				
+			for prefix in prefixes[category]:
+				if remaining_text.begins_with(prefix):
+					detected_prefixes.append(prefix)
+					emit_signal("prefix_detected", prefix)
+					used_prefix_categories[category] = true
+					remaining_text = remaining_text.substr(prefix.length())
+					prefix_found = true
+					break
+	
+	# Step 2: Detect root (mandatory)
+	var root_found = false
 	for root in roots:
-		if spellword.begins_with(root):
-			root_found = root
-			components.append(root)
+		if remaining_text.begins_with(root):
+			detected_root = root
 			emit_signal("root_detected", root)
-			spellword = spellword.substr(root.length(), spellword.length() - root.length())
+			remaining_text = remaining_text.substr(root.length())
+			root_found = true
 			break
-
-	if root_found == "":
+	
+	if not root_found:
 		return false  # No valid root found
-
-	# Collect all valid suffixes (one per category) in the correct order
-	var detected_suffixes = []
-	var remaining_spellword = spellword  # Keep track of the remaining spellword for suffix parsing
-
-	# Iterate from left to right to detect suffixes
-	var i = 0
-	while i < remaining_spellword.length():
-		var matched_suffix = false  # Flag to indicate if a suffix was matched
+	
+	# Step 3: Detect suffixes
+	while remaining_text.length() > 0:
+		var suffix_found = false
+		
+		# Try to match a suffix
 		for category in suffixes:
+			if category in used_suffix_categories:
+				continue  # Skip if category already used
+				
 			for suffix in suffixes[category]:
-				# Use the custom function to check if the substring starts at index `i`
-				if begins_with_at_index(remaining_spellword, suffix, i) and category not in used_suffix_categories:
-					components.append(suffix)
+				if remaining_text.begins_with(suffix):
 					detected_suffixes.append(suffix)
 					emit_signal("suffix_detected", suffix)
 					used_suffix_categories[category] = true
-					i += suffix.length()  # Move index forward by the length of the matched suffix
-					matched_suffix = true  # Set the flag to true
-					break  # Break out of the inner loop once a match is found
-			if matched_suffix:
-				break  # Break out of the category loop if a match is found
-		if not matched_suffix:
-			i += 1  # Move to the next character if no suffix is matched
-
-	# Ensure the `spellword` is emptied properly after suffix parsing
-	if i == remaining_spellword.length():
-		spellword = ""  # Mark spellword as fully parsed
-
-	# Ensure the spellword is fully parsed with no leftover text
-	if spellword != "":
-		return false
-
-	# Emit a signal to highlight all components at once
-	var spell_container: FlowContainer = $"../SpellContainer"
+					remaining_text = remaining_text.substr(suffix.length())
+					suffix_found = true
+					break
+			
+			if suffix_found:
+				break
+		
+		if not suffix_found:
+			return false  # Unknown component found
+		
+		# If we've processed all remaining text, break the loop
+		if remaining_text.length() == 0:
+			break
 	
-	spell_container.highlight_valid_spell_components(detected_prefixes, root_found, detected_suffixes)
-
+	# All text should be consumed by valid components
+	if remaining_text.length() > 0:
+		return false
+	
+	# Highlight all components at once
+	var spell_container: FlowContainer = $"../SpellContainer"
+	spell_container.highlight_valid_spell_components(detected_prefixes, detected_root, detected_suffixes)
+	
 	return true
 
 func _on_text_changed(new_text: String) -> void:
-	spellword = new_text.strip_edges()
-	if is_valid_spell(spellword):
+	# Only allow a-zA-Z characters
+	var regex = RegEx.new()
+	regex.compile("[^a-zA-Z]")
+	spellword = regex.sub(new_text, "", true).strip_edges()
+	
+	# If the cleaned text is different from input, update the LineEdit
+	if spellword != new_text:
+		text = spellword
+		set_caret_column(spellword.length())
+	
+	# Convert to lowercase for consistent validation
+	var lowercase_spell = spellword.to_lower()
+	
+	if is_valid_spell(lowercase_spell):
 		rich_text_label.text = "Valid Spell: " + spellword
+		emit_signal("valid_spellword")
 	else:
-		invalid_spellword.emit()
 		rich_text_label.text = "Invalid Spell"
+		emit_signal("invalid_spellword")
+
+# Optional: Add this function to restrict input characters in real-time
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_BACKSPACE or event.keycode == KEY_DELETE:
+			return
+		
+		var typed_char = char(event.unicode)
+		if not typed_char.to_lower().is_valid_identifier():
+			get_viewport().set_input_as_handled()
 
 func _ready():
 	var conjuring = get_node("../../Conjuring/AnimatedSprite2D")
