@@ -6,8 +6,8 @@ var allowed_characters = "[A-Za-z]"
 @export var spellword = ''
 @onready var rich_text_label: RichTextLabel = $"../RichTextLabel"
 
-signal invalid_spellword
-signal valid_spellword
+signal invalid_spellword(word)
+signal valid_spellword(word)
 signal prefix_detected(prefix)
 signal root_detected(root)
 signal suffix_detected(suffix)
@@ -150,12 +150,11 @@ func _on_text_changed(new_text: String) -> void:
 	var lowercase_spell = spellword.to_lower()
 	
 	if is_valid_spell(lowercase_spell):
-		rich_text_label.text = "Valid Spell: " + spellword
-		emit_signal("valid_spellword")
+		emit_signal("valid_spellword", spellword)
 	else:
-		rich_text_label.text = "Invalid Spell"
-		emit_signal("invalid_spellword")
-
+		emit_signal("invalid_spellword", spellword)
+		spellword = ''
+		
 # Optional: Add this function to restrict input characters in real-time
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
