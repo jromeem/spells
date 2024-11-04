@@ -28,7 +28,7 @@ func set_conjuring(setting):
 		conjuring_fx.stop()
 		conjuring_ended.emit()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# get input and toggle conjuring
 	var conjuringActive = Input.is_action_just_pressed("conjure")
 	if (conjuringActive):

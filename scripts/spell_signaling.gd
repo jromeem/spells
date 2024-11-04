@@ -20,20 +20,21 @@ func reset_highlights():
 			glyph.color = Color("#7e5e43a5")  # Reset to original color
 
 # Modified functions to collect components and call highlight_all_components
-func _on_prefix_detected(prefix):
+func _on_prefix_detected(_prefix):
 	pass
 	
-func _on_root_detected(root):
+func _on_root_detected(_root):
 	pass
 
-func _on_suffix_detected(suffix):
+func _on_suffix_detected(_suffix):
 	pass
 
-func _on_invalid_spellword() -> void:
+func _on_invalid_spellword(spellword) -> void:
+	print('invalid spell!', spellword)
 	reset_highlights()
 
-func _on_valid_spellword() -> void:
-	print('valid spell!')
+func _on_valid_spellword(spellword) -> void:
+	print('valid spell!', spellword)
 	pass
 
 # Collects and highlights all components together for a single valid spellword

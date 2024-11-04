@@ -49,10 +49,10 @@ func flatten_array(nested_array: Array) -> Array:
 	return flat_array
 
 # Custom function to check if a string begins with a substring at a specific index
-func begins_with_at_index(str: String, substring: String, index: int) -> bool:
-	if index < 0 or index >= str.length():
+func begins_with_at_index(string: String, substring: String, index: int) -> bool:
+	if index < 0 or index >= string.length():
 		return false  # Index out of bounds
-	return str.substr(index, substring.length()) == substring
+	return string.substr(index, substring.length()) == substring
 
 func is_valid_spell(spell_input: String) -> bool:
 	# Make a copy of the input to work with
@@ -78,7 +78,7 @@ func is_valid_spell(spell_input: String) -> bool:
 			for prefix in prefixes[category]:
 				if remaining_text.begins_with(prefix):
 					detected_prefixes.append(prefix)
-					emit_signal("prefix_detected", prefix)
+					prefix_detected.emit(prefix)
 					used_prefix_categories[category] = true
 					remaining_text = remaining_text.substr(prefix.length())
 					prefix_found = true
@@ -89,7 +89,7 @@ func is_valid_spell(spell_input: String) -> bool:
 	for root in roots:
 		if remaining_text.begins_with(root):
 			detected_root = root
-			emit_signal("root_detected", root)
+			root_detected.emit(root)
 			remaining_text = remaining_text.substr(root.length())
 			root_found = true
 			break
@@ -109,6 +109,7 @@ func is_valid_spell(spell_input: String) -> bool:
 			for suffix in suffixes[category]:
 				if remaining_text.begins_with(suffix):
 					detected_suffixes.append(suffix)
+					suffix_detected.emit(suffix)
 					emit_signal("suffix_detected", suffix)
 					used_suffix_categories[category] = true
 					remaining_text = remaining_text.substr(suffix.length())
@@ -150,9 +151,9 @@ func _on_text_changed(new_text: String) -> void:
 	var lowercase_spell = spellword.to_lower()
 	
 	if is_valid_spell(lowercase_spell):
-		emit_signal("valid_spellword", spellword)
+		valid_spellword.emit(spellword)
 	else:
-		emit_signal("invalid_spellword", spellword)
+		invalid_spellword.emit(spellword)
 		spellword = ''
 		
 # Optional: Add this function to restrict input characters in real-time
@@ -166,7 +167,7 @@ func _gui_input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 
 func _ready():
-	var conjuring = get_node("../../Conjuring/AnimatedSprite2D")
+	var conjuring = get_node("../../ConjuringFX/AnimatedSprite2D")
 	conjuring.connect("conjuring_started", _on_conjure_start)
 	conjuring.connect("conjuring_ended", _on_conjure_end)
 	line_edit.visible = false

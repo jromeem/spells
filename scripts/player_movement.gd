@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var isConjuring = false
 @export var speed = 80
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animated_sprite: AnimatedSprite2D = $DinoSprite
 
 func _on_conjure_start():
 	isConjuring = !isConjuring
@@ -13,11 +13,11 @@ func _on_conjure_end():
 	speed = 80
 
 func _ready():
-	var conjuring = get_node("Conjuring/AnimatedSprite2D")
+	var conjuring = get_node("ConjuringFX/AnimatedSprite2D")
 	conjuring.connect("conjuring_started", _on_conjure_start)
 	conjuring.connect("conjuring_ended", _on_conjure_end)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if (isConjuring):
 		animated_sprite.play("step")
 	else:

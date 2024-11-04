@@ -1,0 +1,416 @@
+[gd_scene load_steps=7 format=3 uid="uid://cwhfgde30qddp"]
+
+[ext_resource type="Script" path="res://scripts/spelling.gd" id="1_seqx7"]
+[ext_resource type="Script" path="res://scripts/spell_signaling.gd" id="2_1xbjd"]
+
+[sub_resource type="SystemFont" id="SystemFont_0dpym"]
+font_names = PackedStringArray("AkayaTelivigala")
+font_weight = 100
+font_stretch = 50
+subpixel_positioning = 0
+oversampling = 10.0
+
+[sub_resource type="SystemFont" id="SystemFont_ufxk6"]
+font_names = PackedStringArray("Andale Mono")
+font_weight = 999
+subpixel_positioning = 0
+oversampling = 10.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8776n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lb3q5"]
+content_margin_left = 6.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.204459, 0.195015, 0.180139, 0.741176)
+border_color = Color(0, 0, 0, 0)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0.0862745, 0.0862745, 0.0862745, 0)
+shadow_size = 1
+shadow_offset = Vector2(1, 2)
+anti_aliasing_size = 0.01
+
+[node name="Conjuring" type="Control"]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+offset_left = 1.0
+offset_top = 51.0
+offset_right = 168.0
+offset_bottom = 90.0
+theme_override_fonts/normal_font = SubResource("SystemFont_0dpym")
+theme_override_font_sizes/normal_font_size = 19
+scroll_active = false
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+offset_left = -153.0
+offset_top = 96.0
+offset_right = 170.0
+offset_bottom = 122.1
+theme_override_colors/font_color = Color(1, 0.752941, 0.403922, 0.627451)
+theme_override_fonts/font = SubResource("SystemFont_ufxk6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8776n")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lb3q5")
+alignment = 1
+max_length = 25
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+caret_blink = true
+caret_blink_interval = 0.25
+caret_force_displayed = true
+caret_mid_grapheme = true
+script = ExtResource("1_seqx7")
+
+[node name="SpellContainer" type="FlowContainer" parent="."]
+layout_mode = 0
+offset_left = -152.0
+offset_top = 47.0
+offset_right = -2.0
+offset_bottom = 93.0
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 2
+script = ExtResource("2_1xbjd")
+
+[node name="TargetingPrefix" type="HBoxContainer" parent="SpellContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 1
+
+[node name="In" type="ColorRect" parent="SpellContainer/TargetingPrefix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Ma" type="ColorRect" parent="SpellContainer/TargetingPrefix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Ex" type="ColorRect" parent="SpellContainer/TargetingPrefix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="AmpPrefix" type="HBoxContainer" parent="SpellContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 1
+
+[node name="Tri" type="ColorRect" parent="SpellContainer/AmpPrefix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Ka" type="ColorRect" parent="SpellContainer/AmpPrefix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Epi" type="ColorRect" parent="SpellContainer/AmpPrefix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="ControlPrefix" type="HBoxContainer" parent="SpellContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 1
+
+[node name="Ve" type="ColorRect" parent="SpellContainer/ControlPrefix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Xo" type="ColorRect" parent="SpellContainer/ControlPrefix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Dis" type="ColorRect" parent="SpellContainer/ControlPrefix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="UtilityPrefix" type="HBoxContainer" parent="SpellContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 1
+
+[node name="Ra" type="ColorRect" parent="SpellContainer/UtilityPrefix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Su" type="ColorRect" parent="SpellContainer/UtilityPrefix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Pa" type="ColorRect" parent="SpellContainer/UtilityPrefix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="BaseRoots" type="HBoxContainer" parent="SpellContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 1
+
+[node name="Aqua" type="ColorRect" parent="SpellContainer/BaseRoots"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Pyri" type="ColorRect" parent="SpellContainer/BaseRoots"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Volt" type="ColorRect" parent="SpellContainer/BaseRoots"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Zeph" type="ColorRect" parent="SpellContainer/BaseRoots"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Terr" type="ColorRect" parent="SpellContainer/BaseRoots"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Ferrum" type="ColorRect" parent="SpellContainer/BaseRoots"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Lux" type="ColorRect" parent="SpellContainer/BaseRoots"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Nox" type="ColorRect" parent="SpellContainer/BaseRoots"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="AltRoots" type="HBoxContainer" parent="SpellContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 100.0
+theme_override_constants/separation = 1
+
+[node name="Corpus" type="ColorRect" parent="SpellContainer/AltRoots"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Mentis" type="ColorRect" parent="SpellContainer/AltRoots"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Luxus" type="ColorRect" parent="SpellContainer/AltRoots"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Chron" type="ColorRect" parent="SpellContainer/AltRoots"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Sensus" type="ColorRect" parent="SpellContainer/AltRoots"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Vita" type="ColorRect" parent="SpellContainer/AltRoots"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Mortis" type="ColorRect" parent="SpellContainer/AltRoots"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Ordo" type="ColorRect" parent="SpellContainer/AltRoots"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="PowerSuffix" type="HBoxContainer" parent="SpellContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 1
+
+[node name="Lo" type="ColorRect" parent="SpellContainer/PowerSuffix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Ri" type="ColorRect" parent="SpellContainer/PowerSuffix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Sha" type="ColorRect" parent="SpellContainer/PowerSuffix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="DurationSuffix" type="HBoxContainer" parent="SpellContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 1
+
+[node name="Len" type="ColorRect" parent="SpellContainer/DurationSuffix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Tan" type="ColorRect" parent="SpellContainer/DurationSuffix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="EffectSuffix" type="HBoxContainer" parent="SpellContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 1
+
+[node name="Nu" type="ColorRect" parent="SpellContainer/EffectSuffix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Dra" type="ColorRect" parent="SpellContainer/EffectSuffix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Via" type="ColorRect" parent="SpellContainer/EffectSuffix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Tos" type="ColorRect" parent="SpellContainer/EffectSuffix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Rum" type="ColorRect" parent="SpellContainer/EffectSuffix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[node name="Sol" type="ColorRect" parent="SpellContainer/EffectSuffix"]
+custom_minimum_size = Vector2(8, 14)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.494118, 0.368627, 0.262745, 0.647059)
+
+[connection signal="invalid_spellword" from="LineEdit" to="SpellContainer" method="_on_invalid_spellword"]
+[connection signal="prefix_detected" from="LineEdit" to="SpellContainer" method="_on_prefix_detected"]
+[connection signal="root_detected" from="LineEdit" to="SpellContainer" method="_on_root_detected"]
+[connection signal="suffix_detected" from="LineEdit" to="SpellContainer" method="_on_suffix_detected"]
+[connection signal="text_changed" from="LineEdit" to="LineEdit" method="_on_text_changed"]
+[connection signal="valid_spellword" from="LineEdit" to="SpellContainer" method="_on_valid_spellword"]
