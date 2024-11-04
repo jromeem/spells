@@ -166,8 +166,9 @@ func _gui_input(event: InputEvent) -> void:
 		if not typed_char.to_lower().is_valid_identifier():
 			get_viewport().set_input_as_handled()
 
+
 func _ready():
-	var conjuring = get_node("../../ConjuringFX/AnimatedSprite2D")
-	conjuring.connect("conjuring_started", _on_conjure_start)
-	conjuring.connect("conjuring_ended", _on_conjure_end)
+	var player_node = get_node("../..")
+	player_node.connect("conjuring_started", _on_conjure_start)
+	player_node.connect("conjuring_ended", _on_conjure_end)
 	line_edit.visible = false

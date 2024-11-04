@@ -83,3 +83,6 @@ rotation = 0.469494
 [node name="Boundary Right" parent="." instance=ExtResource("4_nv4ea")]
 position = Vector2(39, 276)
 rotation = -0.5044
+
+[connection signal="conjuring_ended" from="Player" to="Player" method="_on_conjuring_ended"]
+[connection signal="conjuring_started" from="Player" to="Player" method="_on_conjuring_started"]

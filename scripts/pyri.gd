@@ -7,9 +7,6 @@ var pyri_loop = 0
 func _ready() -> void:
 	pyri_sprite.play("start")
 
-func _physics_process(delta: float) -> void:
-	pass
-
 # for starting animation, looping an animation, then finishing animation
 func _on_animation_finished():
 	var anim = pyri_sprite.animation

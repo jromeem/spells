@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://67av1dmrvnw7"]
+[gd_scene load_steps=8 format=3 uid="uid://67av1dmrvnw7"]
 
 [ext_resource type="Texture2D" uid="uid://c7e5s2kft5jdb" path="res://assets/Free Smoke Fx  Pixel 05.png" id="1_6ered"]
-[ext_resource type="Script" path="res://scripts/conjuring_fx.gd" id="2_fxirh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rmdc2"]
 atlas = ExtResource("1_6ered")
@@ -57,9 +56,8 @@ animations = [{
 
 [node name="ConjuringFX" type="Node2D"]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Conjuring2DSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fueoy")
 animation = &"air"
 frame_progress = 0.334552
 offset = Vector2(0, 15)
-script = ExtResource("2_fxirh")
