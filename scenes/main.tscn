@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=4 uid="uid://c76vqfj1mn0sk"]
+[gd_scene load_steps=7 format=4 uid="uid://c76vqfj1mn0sk"]
 
 [ext_resource type="Texture2D" uid="uid://bokx78puvx6ko" path="res://assets/TX Tileset Grass.png" id="1_o0gfs"]
 [ext_resource type="PackedScene" uid="uid://ceecc6ntnche" path="res://scenes/tree.tscn" id="2_bs8bb"]
 [ext_resource type="PackedScene" uid="uid://dc5acx317woxt" path="res://scenes/player.tscn" id="3_w22km"]
 [ext_resource type="PackedScene" uid="uid://cfmkn4m66owdp" path="res://scenes/boundary.tscn" id="4_nv4ea"]
-[ext_resource type="PackedScene" uid="uid://b5kmh3otmci3n" path="res://scenes/pyri.tscn" id="4_ul50u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tquko"]
 texture = ExtResource("1_o0gfs")
@@ -72,9 +71,6 @@ position = Vector2(-88, -8)
 
 [node name="Player" parent="." instance=ExtResource("3_w22km")]
 position = Vector2(-12, 22)
-
-[node name="Pyri" parent="." instance=ExtResource("4_ul50u")]
-position = Vector2(21, 22)
 
 [node name="Boundary Left" parent="." instance=ExtResource("4_nv4ea")]
 position = Vector2(-91, 252)

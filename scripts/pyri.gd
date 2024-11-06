@@ -6,18 +6,13 @@ var pyri_loop = 0
 
 func fire():
 	pyri_loop = 0
-	print(pyri_sprite, collision_shape)
-	if (pyri_sprite):
-		pyri_sprite.play("start")
-	else:
-		print('why no exist')
-	#pyri_sprite.play("start")
+	pyri_sprite.play("start")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	pyri_sprite.stop()
 	position.x = 30
 	pyri_loop = 0
-	pyri_sprite.play("start")
 
 # for starting animation, looping an animation, then finishing animation
 func _on_animation_finished():
@@ -35,4 +30,3 @@ func _on_animation_finished():
 		"end":
 			if (pyri_sprite.animation_finished):
 				queue_free()
-				pass 
