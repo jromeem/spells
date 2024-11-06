@@ -30,15 +30,15 @@ func _on_suffix_detected(_suffix):
 	pass
 
 func _on_invalid_spellword(spellword) -> void:
-	print('invalid spell!', spellword)
+	#print('invalid spell!', spellword)
 	reset_highlights()
 
 func _on_valid_spellword(spellword) -> void:
-	print('valid spell!', spellword)
+	print('valid spell! ', spellword)
 	pass
 
 # Collects and highlights all components together for a single valid spellword
 func highlight_valid_spell_components(prefixes: Array, root: String, suffixes: Array):
 	var all_components = prefixes + [root] + suffixes
-	print('allcompo', all_components)
+	#print('allcompo', all_components)
 	highlight_all_components(all_components)

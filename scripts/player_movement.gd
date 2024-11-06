@@ -30,7 +30,6 @@ func toggle_conjuring():
 		conjuring_ended.emit()
 
 func set_conjuring(setting):
-	print('what the setting,', setting)
 	isConjuring = setting
 	conjuring_fx.visible = setting
 	if (isConjuring):
@@ -49,7 +48,6 @@ func _physics_process(_delta):
 	if (isConjuring):
 		animated_sprite.play("step")
 		var conjuringEnd = Input.is_action_just_pressed("conjure_end")
-		print("conjuringEnd", conjuringEnd)
 		if (conjuringEnd):
 			set_conjuring(false)
 	else:

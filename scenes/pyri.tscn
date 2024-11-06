@@ -150,7 +150,7 @@ script = ExtResource("1_pgp5a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4yroa")
-animation = &"loop"
+animation = &"start"
 autoplay = "start"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

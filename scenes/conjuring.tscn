@@ -46,7 +46,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="Label" type="RichTextLabel" parent="."]
 layout_mode = 2
 offset_left = 1.0
 offset_top = 51.0
@@ -59,7 +59,7 @@ shortcut_keys_enabled = false
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="LineEdit" type="LineEdit" parent="."]
+[node name="Spelling" type="LineEdit" parent="."]
 layout_mode = 2
 offset_left = -153.0
 offset_top = 96.0
@@ -408,9 +408,9 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 color = Color(0.494118, 0.368627, 0.262745, 0.647059)
 
-[connection signal="invalid_spellword" from="LineEdit" to="SpellContainer" method="_on_invalid_spellword"]
-[connection signal="prefix_detected" from="LineEdit" to="SpellContainer" method="_on_prefix_detected"]
-[connection signal="root_detected" from="LineEdit" to="SpellContainer" method="_on_root_detected"]
-[connection signal="suffix_detected" from="LineEdit" to="SpellContainer" method="_on_suffix_detected"]
-[connection signal="text_changed" from="LineEdit" to="LineEdit" method="_on_text_changed"]
-[connection signal="valid_spellword" from="LineEdit" to="SpellContainer" method="_on_valid_spellword"]
+[connection signal="invalid_spellword" from="Spelling" to="SpellContainer" method="_on_invalid_spellword"]
+[connection signal="prefix_detected" from="Spelling" to="SpellContainer" method="_on_prefix_detected"]
+[connection signal="root_detected" from="Spelling" to="SpellContainer" method="_on_root_detected"]
+[connection signal="suffix_detected" from="Spelling" to="SpellContainer" method="_on_suffix_detected"]
+[connection signal="text_changed" from="Spelling" to="Spelling" method="_on_text_changed"]
+[connection signal="valid_spellword" from="Spelling" to="SpellContainer" method="_on_valid_spellword"]

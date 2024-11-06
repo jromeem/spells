@@ -1,10 +1,11 @@
-[gd_scene load_steps=32 format=3 uid="uid://dc5acx317woxt"]
+[gd_scene load_steps=33 format=3 uid="uid://dc5acx317woxt"]
 
 [ext_resource type="Script" path="res://scripts/player_movement.gd" id="1_ky4bs"]
 [ext_resource type="Texture2D" uid="uid://dksudyio5mr5x" path="res://assets/DinoSprites - tard.png" id="2_7xn2b"]
 [ext_resource type="PackedScene" uid="uid://67av1dmrvnw7" path="res://scenes/conjuring_fx.tscn" id="3_foe4g"]
 [ext_resource type="PackedScene" uid="uid://cwhfgde30qddp" path="res://scenes/conjuring.tscn" id="4_gil7e"]
 [ext_resource type="PackedScene" uid="uid://ca88bwq83od2x" path="res://scenes/casting.tscn" id="5_r7rgy"]
+[ext_resource type="Script" path="res://scripts/casting.gd" id="6_myyea"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s380s"]
 radius = 3.0
@@ -208,6 +209,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
+motion_mode = 1
 script = ExtResource("1_ky4bs")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -234,4 +236,4 @@ frame_progress = 0.00362824
 [node name="Conjuring" parent="." instance=ExtResource("4_gil7e")]
 
 [node name="Casting" parent="." instance=ExtResource("5_r7rgy")]
-script = null
+script = ExtResource("6_myyea")

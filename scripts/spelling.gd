@@ -4,7 +4,7 @@ var isConjuring = false
 var allowed_characters = "[A-Za-z]"
 @onready var line_edit: LineEdit = $"."
 @export var spellword = ''
-@onready var rich_text_label: RichTextLabel = $"../RichTextLabel"
+@onready var label: RichTextLabel = $"../Label"
 
 signal invalid_spellword(word)
 signal valid_spellword(word)
@@ -19,7 +19,7 @@ func _on_conjure_start():
 
 func _on_conjure_end():
 	isConjuring = !isConjuring
-	rich_text_label.text = spellword
+	label.text = spellword
 	line_edit.visible = false
 	line_edit.text = ''
 
