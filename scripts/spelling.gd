@@ -166,7 +166,6 @@ func _gui_input(event: InputEvent) -> void:
 		if not typed_char.to_lower().is_valid_identifier():
 			get_viewport().set_input_as_handled()
 
-
 func _ready():
 	var player_node = get_node("../..")
 	player_node.connect("conjuring_started", _on_conjure_start)
